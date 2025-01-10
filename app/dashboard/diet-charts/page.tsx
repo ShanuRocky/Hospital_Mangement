@@ -73,7 +73,7 @@ export default function DietChartsPage() {
   const user = localStorage.getItem('user')
   if(!user) return <div>Loading...</div>;
   const user_detail = JSON.parse(user);
-  const url = process.env.URL || 'http://localhost:5000';
+  const url = process.env.NEXT_PUBLIC_API_URL;
 
   const [formData, setFormData] = useState({
     patient_id: "",

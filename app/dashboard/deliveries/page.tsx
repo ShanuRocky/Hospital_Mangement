@@ -61,7 +61,7 @@ export default function DeliveriesPage() {
   const user_details = localStorage.getItem("user")
   if(!user_details)  return <div>Loading...</div>;
   const userdata = JSON.parse(user_details);
-  const url = process.env.URL || 'http://localhost:5000';
+  const url = process.env.NEXT_PUBLIC_API_URL;
 
   if(!userdata) return <div>Loading...</div>;
 
