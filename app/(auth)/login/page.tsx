@@ -8,7 +8,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { login } from "@/lib/api";
 import { useToast } from "@/hooks/use-toast";
-import { Router } from "lucide-react";
 
 function LoginForm() {
   const searchParams = useSearchParams();

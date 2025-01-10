@@ -61,6 +61,7 @@ export default function DeliveriesPage() {
   const user_details = localStorage.getItem("user")
   if(!user_details)  return <div>Loading...</div>;
   const userdata = JSON.parse(user_details);
+  const url = process.env.URL || 'http://localhost:5000';
 
   if(!userdata) return <div>Loading...</div>;
 
@@ -115,7 +116,7 @@ export default function DeliveriesPage() {
 
   async function fetchDeliveryStaff() {
     try {
-      const response = await fetch('http://localhost:5000/api/users?role=delivery');
+      const response = await fetch(`${url}/api/users?role=delivery`);
       const data = await response.json();
       setDeliveryStaff(data);
     } catch (error) {
@@ -154,7 +155,7 @@ export default function DeliveriesPage() {
 
   const assignDeliveryStaff = async (deliveryId: string, staffId: string) => {
     try {
-      await fetch(`http://localhost:5000/api/deliveries/${deliveryId}/assign_delivery`, {
+      await fetch(`${url}/api/deliveries/${deliveryId}/assign_delivery`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

@@ -73,6 +73,7 @@ export default function DietChartsPage() {
   const user = localStorage.getItem('user')
   if(!user) return <div>Loading...</div>;
   const user_detail = JSON.parse(user);
+  const url = process.env.URL || 'http://localhost:5000';
 
   const [formData, setFormData] = useState({
     patient_id: "",
@@ -95,7 +96,7 @@ export default function DietChartsPage() {
 
   async function fetchPantryStaff() {
     try {
-      const response = await fetch('http://localhost:5000/api/users?role=pantry_staff');
+      const response = await fetch(`${url}/api/users?role=pantry_staff`);
       const data = await response.json();
       console.log(data)
       setPantryStaff(data);

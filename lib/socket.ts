@@ -1,6 +1,6 @@
 import { io } from 'socket.io-client';
 
-const socket = io('http://localhost:5000');
+const socket = io(process.env.URL || 'http://localhost:5000');
 
 export const initializeSocket = (userId: string) => {
   socket.emit('join_room', userId);
