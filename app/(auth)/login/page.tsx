@@ -1,18 +1,20 @@
 "use client";
 
 import { useState, Suspense } from "react";
-import {  useSearchParams } from "next/navigation";
+import {  useRouter, useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { login } from "@/lib/api";
 import { useToast } from "@/hooks/use-toast";
+import { Router } from "lucide-react";
 
 function LoginForm() {
   const searchParams = useSearchParams();
   const { toast } = useToast();
   const role = searchParams.get("role") || "manager";
+  const router = useRouter();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -30,6 +32,7 @@ function LoginForm() {
         localStorage.setItem("token", token);
         localStorage.setItem("user", JSON.stringify(user));
         localStorage.setItem("role", role);
+        router.push('/dashboard');
       } else {
         return <div>Loading...</div>;
       }
