@@ -2,6 +2,8 @@ import axios from 'axios';
 
 const url = process.env.URL || 'http://localhost:5000'
 
+console.log(url)
+
 const api = axios.create({
   baseURL: `${url}/api`,
 });
