@@ -1,7 +1,7 @@
 "use client";
 
-import { Suspense, useEffect, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useState, Suspense } from "react";
+import {  useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -9,18 +9,11 @@ import { Label } from "@/components/ui/label";
 import { login } from "@/lib/api";
 import { useToast } from "@/hooks/use-toast";
 
-export default function LoginPage() {
-  const router = useRouter();
+function LoginForm() {
   const searchParams = useSearchParams();
   const { toast } = useToast();
-  const [role, setRole] = useState("manager"); // Default to 'manager'
-  useEffect(() => {
-    const roleParam = searchParams.get("role");
-    if (roleParam) {
-      setRole(roleParam);
-    }
-  }, [searchParams]);
-  
+  const role = searchParams.get("role") || "manager";
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -32,17 +25,16 @@ export default function LoginPage() {
     setError("");
 
     try {
-      const { token, user } = await login(email, password , role);
+      const { token, user } = await login(email, password, role);
       if (typeof window !== "undefined") {
         localStorage.setItem("token", token);
         localStorage.setItem("user", JSON.stringify(user));
         localStorage.setItem("role", role);
-      }else{
-        return <div>loading...</div>
+      } else {
+        return <div>Loading...</div>;
       }
-      router.push("/dashboard");
     } catch (error: any) {
-       toast({
+      toast({
         title: "Error",
         description: error.message,
         variant: "destructive",
@@ -60,7 +52,6 @@ export default function LoginPage() {
   }[role];
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center p-4">
       <Card className="w-full max-w-md">
         <CardHeader>
@@ -105,6 +96,13 @@ export default function LoginPage() {
         </CardContent>
       </Card>
     </div>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <LoginForm />
     </Suspense>
   );
 }
