@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState , Suspense } from "react";
+import { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Users,
@@ -111,7 +111,6 @@ export default function DashboardPage() {
   }
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
     <div className="space-y-8">
       <h1 className="text-3xl font-bold">Dashboard</h1>
 
@@ -155,6 +154,5 @@ export default function DashboardPage() {
         </CardContent>
       </Card>
     </div>
-    </Suspense>
   );
 }

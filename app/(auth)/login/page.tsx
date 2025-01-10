@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -14,8 +14,6 @@ export default function LoginPage() {
   const searchParams = useSearchParams();
   const { toast } = useToast();
   const role = searchParams.get("role") || "manager";
-
-  if(!role) <div>Loading...</div>
   
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -33,7 +31,10 @@ export default function LoginPage() {
         localStorage.setItem("token", token);
         localStorage.setItem("user", JSON.stringify(user));
         localStorage.setItem("role", role);
-      }else return <div>loading.....</div>
+      }else{
+        return <div>loading...</div>
+      }
+      router.push("/dashboard");
     } catch (error: any) {
        toast({
         title: "Error",
@@ -53,6 +54,7 @@ export default function LoginPage() {
   }[role];
 
   return (
+    <Suspense fallback={<div>Loading...</div>}>
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center p-4">
       <Card className="w-full max-w-md">
         <CardHeader>
@@ -97,5 +99,6 @@ export default function LoginPage() {
         </CardContent>
       </Card>
     </div>
+    </Suspense>
   );
 }
