@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = process.env.URL || 'http://localhost:5000'
+const url = process.env.URL
 
 console.log(url)
 
