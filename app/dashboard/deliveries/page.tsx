@@ -18,7 +18,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { getDeliveries, updateDeliveryStatus, updatePreparationStatus } from "@/lib/api";
-import { CheckCircle, Clock, Truck } from "lucide-react";
 import socket, { initializeSocket } from "@/lib/socket";
 import { useToast } from "@/hooks/use-toast";
 
@@ -138,6 +137,7 @@ export default function DeliveriesPage() {
 
   const updateStatus = async (_id: string, status: string, type: 'preparation' | 'delivery') => {
     try {
+      setIsLoading(true);
       if (type === 'preparation') {
         await updatePreparationStatus(_id, status);
       } else {
@@ -150,11 +150,14 @@ export default function DeliveriesPage() {
         description: error.response?.data?.error || "Failed to update status",
         variant: "destructive"
       });
+    } finally{
+        setIsLoading(false)
     }
   };
 
   const assignDeliveryStaff = async (deliveryId: string, staffId: string) => {
     try {
+      setIsLoading(true);
       await fetch(`${url}/api/deliveries/${deliveryId}/assign_delivery`, {
         method: 'PATCH',
         headers: {
@@ -173,6 +176,8 @@ export default function DeliveriesPage() {
         description: error.response?.data?.error || "Failed to assign delivery staff",
         variant: "destructive"
       });
+    } finally{
+      setIsLoading(false);
     }
   };
 

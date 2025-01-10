@@ -5,7 +5,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Users,
   Utensils,
-  Truck,
   CheckCircle2,
   Clock,
 } from "lucide-react";
