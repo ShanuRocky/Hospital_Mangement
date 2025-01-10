@@ -27,13 +27,11 @@ export default function LoginPage() {
 
     try {
       const { token, user } = await login(email, password , role);
-      
-      // Store token and user data
-      localStorage.setItem("token", token);
-      localStorage.setItem("user", JSON.stringify(user));
-      localStorage.setItem("role", role);
-
-      router.push("/dashboard");
+      if (typeof window !== "undefined") {
+        localStorage.setItem("token", token);
+        localStorage.setItem("user", JSON.stringify(user));
+        localStorage.setItem("role", role);
+      }else return <div>loading.....</div>
     } catch (error: any) {
        toast({
         title: "Error",
