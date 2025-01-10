@@ -245,9 +245,9 @@ export default function DeliveriesPage() {
                 </TableCell>
                 <TableCell>
                   <div className="space-y-1">
-                    <div>Pantry: {delivery.assigned_to_pantry.full_name}</div>
+                    <div>Pantry: {delivery.assigned_to_pantry?.full_name}</div>
                     {delivery.assigned_to_delivery && (
-                      <div>Delivery: {delivery.assigned_to_delivery.full_name}</div>
+                      <div>Delivery: {delivery.assigned_to_delivery?.full_name}</div>
                     )}
                   </div>
                 </TableCell>
@@ -289,13 +289,13 @@ export default function DeliveriesPage() {
                       </SelectContent>
                     </Select>
                   )}
-                  {user?.role === "delivery" && delivery.delivery_status !== 'delivered' 
+                  {user?.role === "delivery" && delivery?.delivery_status !== 'delivered' 
                   //  delivery.assigned_to_delivery?._id.toString === user._id.toString
                     && (
                     <Select
-                      value={delivery.delivery_status}
+                      value={delivery?.delivery_status}
                       onValueChange={(value) =>
-                        updateStatus(delivery._id, value, 'delivery')
+                        updateStatus(delivery?._id, value, 'delivery')
                       }
                     >
                       <SelectTrigger className="w-[140px]">
