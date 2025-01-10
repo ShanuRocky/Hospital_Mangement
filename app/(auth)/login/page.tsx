@@ -14,6 +14,8 @@ export default function LoginPage() {
   const searchParams = useSearchParams();
   const { toast } = useToast();
   const role = searchParams.get("role") || "manager";
+
+  if(!role) <div>Loading...</div>
   
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
