@@ -206,13 +206,14 @@ export default function DietChartsPage() {
                     onValueChange={(value) =>
                       setFormData({ ...formData, patient_id: value })
                     }
+                    required
                   >
                     <SelectTrigger>
                       <SelectValue placeholder="Select a patient" />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent >
                       {patients.map((patient) => (
-                        <SelectItem key={patient._id} value={patient._id}>
+                        <SelectItem key={patient._id} value={patient._id}  >
                           {patient.name} - Room {patient.room_number}
                         </SelectItem>
                       ))}
@@ -228,6 +229,7 @@ export default function DietChartsPage() {
                     onValueChange={(value) =>
                       setFormData({ ...formData, assigned_pantry: value })
                     }
+                    required
                   >
                     <SelectTrigger>
                       <SelectValue placeholder="Select pantry staff" />

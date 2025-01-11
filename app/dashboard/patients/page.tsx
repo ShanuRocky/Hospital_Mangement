@@ -228,6 +228,7 @@ export default function PatientsPage() {
                     onChange={(e) =>
                       setFormData({ ...formData, diseases: e.target.value })
                     }
+                    required
                   />
                 </div>
 
@@ -239,6 +240,7 @@ export default function PatientsPage() {
                     onChange={(e) =>
                       setFormData({ ...formData, allergies: e.target.value })
                     }
+                    required
                   />
                 </div>
 
@@ -286,6 +288,7 @@ export default function PatientsPage() {
                     onChange={(e) =>
                       setFormData({ ...formData, contact_number: e.target.value })
                     }
+                    required
                   />
                 </div>
 
